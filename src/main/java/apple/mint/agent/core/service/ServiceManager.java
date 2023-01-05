@@ -59,7 +59,7 @@ public class ServiceManager {
         }
     }
 
-    public ComMessage<?, ?> executeService(String serviceCd) throws Exception {
+    public ComMessage<?, ?> executeService(String serviceCd, ComMessage<?, ?> request) throws Exception {
         Service service = serviceMapper.getService(serviceCd);
         if (service == null)
             throw new Exception("The service is not found by name:".concat(serviceCd));
@@ -67,11 +67,13 @@ public class ServiceManager {
         ComMessage<?, ?> msg = null;
         if (service instanceof RequestService) {
             msg = ((RequestService) service).sendRequest();
+        } else if (service instanceof ResponseService) {
+            msg = ((ResponseService) service).sendResponse(request);
         } else if (service instanceof PushService) {
             msg = ((PushService) service).push();
         } else {
             throw new Exception(
-                    "The service is not supported. The Only supported services are RequestService and PushSerice.");
+                    "The service is not supported. The Only supported services are RequestService, ResponseService, PushSerice.");
         }
         return msg;
     }

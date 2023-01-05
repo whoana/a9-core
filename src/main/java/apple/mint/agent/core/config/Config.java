@@ -9,16 +9,8 @@ public class Config {
     String agentCd;
 
     String password;
-
-    ChannelConfig channelConfig;
-
-    ChannelWrapperConfig channelWrapperConfig;
-
-    // ServiceConfig [] serviceConfigs;
-
-    ServiceMapperConfig serviceMapperConfig;
-
-    ClassLoaderConfig classLoaderConfig;
+ 
+    String settings;
 
     public String getAgentId() {
         return agentId;
@@ -52,48 +44,14 @@ public class Config {
         this.password = password;
     }
 
-    public ChannelConfig getChannelConfig() {
-        return channelConfig;
+    public String getSettings() {
+        return settings;
     }
 
-    public void setChannelConfig(ChannelConfig channelConfig) {
-        this.channelConfig = channelConfig;
+    public void setSettings(String settings) {
+        this.settings = settings;
     }
-
-    public ChannelWrapperConfig getChannelWrapperConfig() {
-        return channelWrapperConfig;
-    }
-
-    public void setChannelWrapperConfig(ChannelWrapperConfig channelWrapperConfig) {
-        this.channelWrapperConfig = channelWrapperConfig;
-    }
-
-    
-    // public ServiceConfig[] getServiceConfigs() {
-    //     return serviceConfigs;
-    // }
-
-    // public void setServiceConfigs(ServiceConfig[] serviceConfigs) {
-    //     this.serviceConfigs = serviceConfigs;
-    // }
-
-    public ServiceMapperConfig getServiceMapperConfig() {
-        return serviceMapperConfig;
-    }
-
-    public void setServiceMapperConfig(ServiceMapperConfig serviceMapperConfig) {
-        this.serviceMapperConfig = serviceMapperConfig;
-    }
-
-    public ClassLoaderConfig getClassLoaderConfig() {
-        return classLoaderConfig;
-    }
-
-    public void setClassLoaderConfig(ClassLoaderConfig classLoaderConfig) {
-        this.classLoaderConfig = classLoaderConfig;
-    }
-
-    
-    
+ 
+       
     
 }

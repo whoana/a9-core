@@ -15,7 +15,7 @@ public abstract class ResponseService extends Service {
 
     public ComMessage<?, ?> sendResponse(ComMessage<?, ?> request) throws Exception {
         ComMessage<?, ?> response = response(request);
-        send(response);
+        if(response != null) send(response);
         return response;
     }
 }
