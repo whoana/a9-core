@@ -26,6 +26,8 @@ public abstract class Service {
 
     protected ServiceContext serviceContext;
 
+    protected RestServiceClient restServiceClient;
+
     public Service(String cd, String name, ServiceContext serviceContext, SendChannelWrapper sendChannelWrapper, Map<?, ?> params, Boolean disabled) {
         this.cd = cd;
         this.name = name;
@@ -33,6 +35,7 @@ public abstract class Service {
         this.sendChannelWrapper = sendChannelWrapper;
         this.params = params;
         this.disabled = disabled;
+        this.restServiceClient = new RestServiceClient();
     }
 
     public void send(ComMessage<?, ?> msg) throws Exception {
@@ -71,5 +74,7 @@ public abstract class Service {
         this.serviceContext = serviceContext;
     }
 
-    
+    public RestServiceClient getRestServiceClient() {
+        return this.restServiceClient;
+    }
 }

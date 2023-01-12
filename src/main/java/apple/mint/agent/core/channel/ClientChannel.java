@@ -190,6 +190,7 @@ public class ClientChannel implements Runnable {
         @Override
         public void handleTextMessage(WebSocketSession session, TextMessage message) {
             try {
+                
                 ComMessage<?, ?> cmsg = messageHandler.deserialize(message.getPayload());
 
                 // TODO Exctension null 처리 하기
