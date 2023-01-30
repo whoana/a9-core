@@ -7,6 +7,8 @@ public class ServiceConfig {
 
     String name;
 
+    String description;
+
     String classPath;
 
     String className;
@@ -61,6 +63,14 @@ public class ServiceConfig {
 
     public void setDisabled(boolean disabled) {
         this.disabled = disabled;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
     
     
