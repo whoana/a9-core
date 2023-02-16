@@ -1,7 +1,7 @@
 package apple.mint.agent.core.config;
 
 public class Config {
-    
+
     String agentId;
 
     String agentNm;
@@ -9,7 +9,11 @@ public class Config {
     String agentCd;
 
     String password;
- 
+
+    String serverAddress;
+
+    String serverPort;
+
     String settings;
 
     public String getAgentId() {
@@ -51,7 +55,21 @@ public class Config {
     public void setSettings(String settings) {
         this.settings = settings;
     }
- 
-       
-    
+
+    public String getServerAddress() {
+        return serverAddress;
+    }
+
+    public void setServerAddress(String serverAddress) {
+        this.serverAddress = serverAddress;
+    }
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(String serverPort) {
+        this.serverPort = serverPort;
+    }
+
 }

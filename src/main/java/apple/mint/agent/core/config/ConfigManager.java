@@ -55,7 +55,11 @@ public class ConfigManager {
 		
 		String settingUrl = config.getSettings();
 
-		URL url = new URL(settingUrl);
+		String address = config.getServerAddress();
+		String port = config.getServerPort();
+		String serverAddress = "http://" + address + ":" + (Util.isEmpty(port) ? "80" : port);
+
+		URL url = new URL(serverAddress + settingUrl);
 		
 		URLConnection con = url.openConnection();
 

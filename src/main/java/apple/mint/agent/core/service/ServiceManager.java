@@ -78,4 +78,9 @@ public class ServiceManager {
         return msg;
     }
 
+    public void clearServiceGroups(){
+        groupMap.clear();
+        groupMap = null;
+    }
+
 }

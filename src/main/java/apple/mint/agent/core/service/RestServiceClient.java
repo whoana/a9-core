@@ -51,7 +51,7 @@ public class RestServiceClient {
 		if (responseEntity == null)
 			throw new Exception("RestServiceClient response is null.");
 		ComMessage<?, ?> response = (ComMessage<?, ?>) responseEntity.getBody();
-
+		
 		// if(response == null) {
 		// throw new Exception("ComMessage response is null.");
 		// }else{

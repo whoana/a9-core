@@ -168,7 +168,6 @@ public class ServiceMapper {
     }
 
     public void addService(
-            String[] uriList,
             ServiceConfig[] serviceConfigs,
             ServiceContext serviceContext,
             SendChannelWrapper sendChannelWrapper,
@@ -178,19 +177,7 @@ public class ServiceMapper {
 
         if (serviceConfigs == null || serviceConfigs.length == 0)
             return;
-
-        // if (uriList == null || uriList.length == 0) {
-        // throw new IllegalArgumentException("class uriList must be not null.");
-        // }
-
-        // Method method = URLClassLoader.class.getDeclaredMethod("addURL", URL.class);
-        // if (!method.isAccessible()) {
-        // method.setAccessible(true);
-        // }
-
-        // for (int i = 0; i < uriList.length; i++) {
-        // method.invoke(classLoader, new URL(uriList[i]));
-        // }
+ 
 
         try {
             for (ServiceConfig serviceConfig : serviceConfigs) {
@@ -202,7 +189,7 @@ public class ServiceMapper {
                     Boolean disabled = serviceConfig.isDisabled();
 
                     Class<?> clazz = classLoader.loadClass(className);
-                    // Class<?> clazz = Class.forName(className, false, classLoader);
+                    //Class<?> clazz = Class.forName(className, false, classLoader);
 
                     Class<?>[] parameterTypes = { String.class, String.class, ServiceContext.class,
                             SendChannelWrapper.class, Map.class, Boolean.class };
@@ -220,8 +207,8 @@ public class ServiceMapper {
                 }
             }
         } finally {
-            //if (classLoader != null) classLoader.close();
-            logger.info("classLoader 닫지 않는다.");
+            // if (classLoader != null) classLoader.close();
+            // logger.info("classLoader 닫지 않는다.");
         }
 
     }

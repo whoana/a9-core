@@ -16,20 +16,20 @@ public class LogoutService extends RequestService<Object, IIPAgentInfo> {
 
     Logger logger = LoggerFactory.getLogger(LoginService.class);
 
-    private String agentCd;
+    private String agentNm;
 
-    public LogoutService(String name, String cd, String agentCd, ServiceContext serviceContext,
+    public LogoutService(String name, String cd, String agentNm, ServiceContext serviceContext,
             SendChannelWrapper sendQueueWrapper,
             boolean disabled) {
         super(cd, name, serviceContext, sendQueueWrapper, null, disabled);
-        this.agentCd = agentCd;
+        this.agentNm = agentNm;
     }
 
     @Override
     public ComMessage<Object, IIPAgentInfo> request() throws Exception {
         ComMessage<Object, IIPAgentInfo> msg = new ComMessage<Object, IIPAgentInfo>();
         msg.setId(UUID.randomUUID().toString());
-        msg.setUserId(agentCd);
+        msg.setUserId(agentNm); //에이전트 로그인 로그아웃 시 서비스에서 nm 기준으로 처리  
         msg.setStartTime(Util.getFormatedDate(Util.DEFAULT_DATE_FORMAT_MI));
         Extension ext = new Extension();
         ext.setMsgType(Extension.MSG_TYPE_REQ);

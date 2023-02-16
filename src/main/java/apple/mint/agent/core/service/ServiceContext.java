@@ -8,6 +8,10 @@ public class ServiceContext {
     
     RestartAgentService restartAgentService;
 
+    String serverAddress;
+
+    String serverPort;
+
     public synchronized IIPAgentInfo getAgentInfo() {
         return agentInfo;
     }
@@ -22,6 +26,22 @@ public class ServiceContext {
 
     public void setRestartAgentService(RestartAgentService restartAgentService) {
         this.restartAgentService = restartAgentService;
+    }
+
+    public String getServerAddress() {
+        return serverAddress;
+    }
+
+    public void setServerAddress(String serverAddress) {
+        this.serverAddress = serverAddress;
+    }
+
+    public String getServerPort() {
+        return serverPort;
+    }
+
+    public void setServerPort(String serverPort) {
+        this.serverPort = serverPort;
     }
     
     

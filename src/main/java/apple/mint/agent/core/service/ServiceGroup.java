@@ -39,7 +39,7 @@ public class ServiceGroup implements Runnable {
 
     public void start() {
         if (thread == null) {
-            thread = new Thread(this, config.getName());
+            thread = new Thread(this, config.getName().concat("@"+this.hashCode()));
         } else {
             stop();
         }
@@ -130,7 +130,7 @@ public class ServiceGroup implements Runnable {
                 }
             }
         }
-        logger.info(config.getName().concat(" are finished."));
+        logger.info(Thread.currentThread().getName().concat(" are finished."));
     }
 
 }
