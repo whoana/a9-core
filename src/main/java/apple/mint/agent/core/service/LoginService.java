@@ -18,6 +18,8 @@ public class LoginService extends RequestService<Object, IIPAgentInfo> {
 
     private String agentNm;
 
+    private boolean login = false;
+
     public LoginService(String name, String cd, String agentNm, String password, ServiceContext serviceContext,
             SendChannelWrapper sendQueueWrapper,
             boolean disabled) {
@@ -44,10 +46,17 @@ public class LoginService extends RequestService<Object, IIPAgentInfo> {
 
         // AgentInfo 정보를 모든 서비스에서 사용 가능하도록 세팅한다.
         IIPAgentInfo agentInfo = response.getResponseObject();
-        if (agentInfo != null)
+        if (agentInfo != null){
             serviceContext.setAgentInfo(agentInfo);
+            login = true;
+        }
 
         return response;
+    }
+
+    
+    public boolean login() {
+        return login;
     }
 
 }

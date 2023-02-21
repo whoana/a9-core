@@ -4,11 +4,16 @@ import java.util.LinkedHashMap;
 
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import apple.mint.agent.core.channel.SendChannelWrapper;
 import apple.mint.agent.core.config.ServiceGroupConfig;
 import pep.per.mint.common.data.basic.ComMessage;
 
 public class ServiceManager {
+
+    Logger logger = LoggerFactory.getLogger(ServiceManager.class);
 
     ServiceGroupConfig[] configs;
 
@@ -17,6 +22,8 @@ public class ServiceManager {
     ServiceMapper serviceMapper;
 
     Map<String, ServiceGroup> groupMap;
+
+    long waittingForLoginDlay = 1000;
 
     public ServiceManager(ServiceGroupConfig[] configs, ServiceMapper serviceMapper,
             SendChannelWrapper sendChannelWrapper) {
@@ -45,7 +52,19 @@ public class ServiceManager {
         groupMap.get(groupId).stop();
     }
 
+    
     public void startServiceGroupAll() {
+        
+        while(true){
+            if(serviceMapper.getLoginService().login()) break;
+            try {
+                Thread.sleep(waittingForLoginDlay);
+            } catch (InterruptedException e) {
+                return;
+            }
+            logger.info("Waitting for login....");
+        }
+
         for (ServiceGroupConfig config : configs) {
             if (!config.isDisabled())
                 groupMap.get(config.getId()).start();
