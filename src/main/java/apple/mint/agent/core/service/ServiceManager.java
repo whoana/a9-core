@@ -52,11 +52,11 @@ public class ServiceManager {
         groupMap.get(groupId).stop();
     }
 
-    
     public void startServiceGroupAll() {
-        
-        while(true){
-            if(serviceMapper.getLoginService().login()) break;
+
+        while (true) {
+            if (serviceMapper.getLoginService().login())
+                break;
             try {
                 Thread.sleep(waittingForLoginDlay);
             } catch (InterruptedException e) {
@@ -78,6 +78,13 @@ public class ServiceManager {
         }
     }
 
+    public void resetService(String serviceCd) throws Exception {
+        Service service = serviceMapper.getService(serviceCd);
+        if (service == null)
+            throw new Exception("The service is not found by name:".concat(serviceCd));
+        service.reset();
+    }
+
     public ComMessage<?, ?> executeService(String serviceCd, ComMessage<?, ?> request) throws Exception {
         Service service = serviceMapper.getService(serviceCd);
         if (service == null)
@@ -97,7 +104,7 @@ public class ServiceManager {
         return msg;
     }
 
-    public void clearServiceGroups(){
+    public void clearServiceGroups() {
         groupMap.clear();
         groupMap = null;
     }

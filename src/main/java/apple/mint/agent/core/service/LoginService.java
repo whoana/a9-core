@@ -59,4 +59,9 @@ public class LoginService extends RequestService<Object, IIPAgentInfo> {
         return login;
     }
 
+    @Override
+    public void reset(){
+        logger.info(this.getClass().getSimpleName() + " was resetted.");
+    }
+
 }

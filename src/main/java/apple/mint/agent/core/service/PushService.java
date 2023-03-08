@@ -12,7 +12,7 @@ public abstract class PushService extends Service {
     }
 
     abstract public ComMessage<?, ?> makePushMessage() throws Exception;
-
+     
     public ComMessage<?, ?> push() throws Exception {
         ComMessage<?, ?> msg = makePushMessage();
         if(msg != null) send(msg);

@@ -47,4 +47,9 @@ public class LogoutService extends RequestService<Object, IIPAgentInfo> {
         return response;
     }
 
+    @Override
+    public void reset(){
+        logger.info(this.getClass().getSimpleName() + " was resetted.");
+    }
+
 }

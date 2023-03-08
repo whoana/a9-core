@@ -61,6 +61,14 @@ public class ServiceGroup implements Runnable {
         logger.info(config.getName().concat(" are started.."));
         String[] serviceCds = config.getServiceCds();
 
+
+        // reset services in the group
+        {
+            for (String serviceCd : serviceCds) {
+                serviceMapper.getService(serviceCd).reset();
+            }
+        }
+
         while (thread != null && Thread.currentThread().equals(thread)) {
             try {
 

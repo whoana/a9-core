@@ -28,6 +28,9 @@ public abstract class Service {
 
     protected RestServiceClient restServiceClient;
 
+
+    abstract public void reset();
+
     public Service(String cd, String name, ServiceContext serviceContext, SendChannelWrapper sendChannelWrapper, Map<?, ?> params, Boolean disabled) {
         this.cd = cd;
         this.name = name;
