@@ -16,6 +16,10 @@ public class Config {
 
     String settings;
 
+    long tryConfigDelay = 10000;
+
+    int maxConfigCount = 5;
+
     public String getAgentId() {
         return agentId;
     }
@@ -70,6 +74,22 @@ public class Config {
 
     public void setServerPort(String serverPort) {
         this.serverPort = serverPort;
+    }
+
+    public long getTryConfigDelay() {
+        return tryConfigDelay;
+    }
+
+    public void setTryConfigDelay(long tryConfigDelay) {
+        this.tryConfigDelay = tryConfigDelay;
+    }
+
+    public int getMaxConfigCount() {
+        return maxConfigCount;
+    }
+
+    public void setMaxConfigCount(int maxConfigCount) {
+        this.maxConfigCount = maxConfigCount;
     }
 
 }

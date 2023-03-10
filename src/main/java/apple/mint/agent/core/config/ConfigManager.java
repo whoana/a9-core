@@ -22,6 +22,12 @@ import pep.per.mint.common.util.Util;
  */
 public class ConfigManager {
 	
+	ObjectMapper jsonMapper = new ObjectMapper();
+    String configHome = "./src/main/resources/config";
+	String configFile = "config.json";
+	Config config;
+	Settings settings;
+ 
 	public static void main(String[] args) {
 		try{
 			System.setProperty("apple.mint.home", "/Users/whoana/DEV/workspace-vs/a9/home");
@@ -34,35 +40,31 @@ public class ConfigManager {
         }
     }
 	
-	ObjectMapper jsonMapper = new ObjectMapper();
-    String configHome = "./src/main/resources/config";
-	String configFile = "config.json";
-	Config config;
-	Settings settings;
- 
-    public void prepare() throws Exception {
-		jsonMapper.enable(JsonParser.Feature.ALLOW_COMMENTS);
 
+	public ConfigManager () throws Exception {
+		
+		jsonMapper.enable(JsonParser.Feature.ALLOW_COMMENTS);
+		jsonMapper.enable(JsonParser.Feature.ALLOW_MISSING_VALUES);
+		jsonMapper.enable(JsonParser.Feature.ALLOW_TRAILING_COMMA);
+	
 		// configHome = System.getProperty("rose.mary.config.home");
 		configHome = System.getProperty("apple.mint.home") + File.separator + "config";
 		System.out.println("configHome:" + configHome);
 		System.getProperties().list(System.out);
-
+	
 		if (configHome == null) {
 			throw new Exception("-Dapple.mint.home={설정홈} 값을 읽을 수 없습니다.(errorcd:APPLEMINT-0001)");
 		}
 		config = (Config) readObjectFromJson(new File(configHome, configFile), Config.class, null);
-		
-		String settingUrl = config.getSettings();
+	}
 
+    public void prepare() throws Exception {		
+		String settingUrl = config.getSettings();
 		String address = config.getServerAddress();
 		String port = config.getServerPort();
 		String serverAddress = "http://" + address + ":" + (Util.isEmpty(port) ? "80" : port);
-
-		URL url = new URL(serverAddress + settingUrl);
-		
+		URL url = new URL(serverAddress + settingUrl);		
 		URLConnection con = url.openConnection();
-
 		ByteArrayOutputStream baos  = new ByteArrayOutputStream();
 		InputStream is = con.getInputStream();
 		while(true){
