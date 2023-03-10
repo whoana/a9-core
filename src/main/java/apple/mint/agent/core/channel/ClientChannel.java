@@ -1,6 +1,6 @@
 package apple.mint.agent.core.channel;
 
-import org.springframework.web.socket.client.WebSocketClient;
+
 import org.springframework.web.socket.client.WebSocketConnectionManager;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
@@ -14,6 +14,7 @@ import pep.per.mint.common.msg.handler.ItemDeserializer;
 import pep.per.mint.common.msg.handler.MessageHandler;
 import pep.per.mint.common.util.Util;
 
+import java.io.IOException;
 import java.util.Queue;
 
 import org.slf4j.Logger;
@@ -113,11 +114,27 @@ public class ClientChannel implements Runnable {
     public void stop() {
         if (thread != null) {
             try {
-                logout();
+                logout();                
             } catch (Exception e) {
                 logger.error("logout fail:", e);
             }
             thread.interrupt();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+
+            if(session != null && session.isOpen()) {
+                try {
+                    session.close();
+                } catch (IOException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+                manager.stop();
+            }
         }
     }
 
@@ -164,6 +181,9 @@ public class ClientChannel implements Runnable {
             }
         }
         state = ChannelState.stopped;
+
+        
+
     }
 
     public void send(ComMessage<?, ?> cmsg) throws Exception {
@@ -221,6 +241,12 @@ public class ClientChannel implements Runnable {
             session.setBinaryMessageSizeLimit(3*1024*1024);
             session.setTextMessageSizeLimit(3*1024*1024);
             ClientChannel.this.session = session;
+
+            logger.info("session info : " + session.toString());
+            logger.info("session hashCode :" + session.hashCode());
+            logger.info("session localAddress :" + session.getLocalAddress().toString());
+            logger.info("session remoteAddress :" + session.getRemoteAddress().toString());
+
             try {
                 if (ClientChannel.this.serviceMapper == null) {
                     throw new Exception("ClientChannel.this.loginService == null");
