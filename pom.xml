@@ -38,6 +38,30 @@
       <scope>provided</scope>
 		 </dependency>
 
+     <dependency>
+			<groupId>lemon.balm</groupId>
+		    <artifactId>s9-utility</artifactId>
+		    <version>1.0.0</version>		
+		</dependency>
+	
+		<dependency>
+			<groupId>rose.mary.trace</groupId>
+		    <artifactId>t9-cache</artifactId>
+		    <version>1.0.0</version>		
+		</dependency>
+
+		<dependency>
+			<groupId>org.infinispan</groupId>
+		    <artifactId>infinispan-core</artifactId>
+		    <version>9.4.16.Final</version>		
+		</dependency>
+ 
+    <dependency>
+			<groupId>ch.qos.logback</groupId>
+		    <artifactId>logback-classic</artifactId>
+		    <version>1.2.3</version>		
+		</dependency> 
+
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

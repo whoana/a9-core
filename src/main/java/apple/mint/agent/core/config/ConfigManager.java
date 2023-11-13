@@ -8,10 +8,14 @@ import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import pep.per.mint.common.util.Util;
+import rose.mary.trace.core.esnecil.S9LManager;
 
 /**
  * <pre>
@@ -30,7 +34,7 @@ public class ConfigManager {
  
 	public static void main(String[] args) {
 		try{
-			System.setProperty("apple.mint.home", "/Users/whoana/DEV/workspace-vs/a9/home");
+			System.setProperty("apple.mint.home", "/Users/whoana/DEV/workspaces/vsc/a9/home");
             ConfigManager configManager = new ConfigManager();
             configManager.prepare();
             Config config = configManager.getConfig();
@@ -40,8 +44,19 @@ public class ConfigManager {
         }
     }
 	
+	Logger logger = LoggerFactory.getLogger(getClass());
 
 	public ConfigManager () throws Exception {
+		/* uncomment constructor for activating license  */
+		/* 
+		try {
+            new S9LManager().start();
+            logger.info("S9LManager running...");
+        } catch (Exception e) {
+			logger.error("license problem:", e);
+            System.exit(-1);
+        }
+		*/
 		
 		jsonMapper.enable(JsonParser.Feature.ALLOW_COMMENTS);
 		jsonMapper.enable(JsonParser.Feature.ALLOW_MISSING_VALUES);
